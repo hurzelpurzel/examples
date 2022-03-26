@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.22.0 (955b78124)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: wasmcloud
+  name: wasmcloud
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: wasmcloud
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert
+        kompose.version: 1.22.0 (955b78124)
+      creationTimestamp: null
+      labels:
+        io.kompose.service: wasmcloud
+    spec:
+      containers:
+        - env:
+            - name: WASMCLOUD_CTL_HOST
+              value: nats
+            - name: WASMCLOUD_PROV_RPC_HOST
+              value: nats
+            - name: WASMCLOUD_RPC_HOST
+              value: nats
+          image: wasmcloud/wasmcloud_host:latest
+          name: wasmcloud
+          ports:
+            - containerPort: 4000
+            - containerPort: 8080
+            - containerPort: 8081
+            - containerPort: 8082
+            - containerPort: 8083
+            - containerPort: 8084
+            - containerPort: 8085
+            - containerPort: 8086
+            - containerPort: 8087
+            - containerPort: 8088
+            - containerPort: 8089
+          resources: {}
+      restartPolicy: Always
+status: {}
